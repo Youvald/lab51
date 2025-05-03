@@ -44,33 +44,23 @@ describe('Magento UI Interaction Tests', () => {
 
   test('4. Navigating to Jackets category via hover and click', async () => {
     await page.goto('https://magento.softwaretestingboard.com', { waitUntil: 'domcontentloaded' });
-  
-    await page.waitForSelector('#ui-id-5', { visible: true }); // Men
+    await page.waitForSelector('#ui-id-5', { visible: true }); 
     await page.hover('#ui-id-5');
-  
-    await page.waitForSelector('#ui-id-17', { visible: true }); // Tops
+    await page.waitForSelector('#ui-id-17', { visible: true });
     await page.hover('#ui-id-17');
-  
-    await page.waitForSelector('#ui-id-19', { visible: true }); // Jackets
+    await page.waitForSelector('#ui-id-19', { visible: true });
     await page.click('#ui-id-19');
-  
-    // замість networkidle2 — просто очікуємо появу заголовка
     await page.waitForSelector('.page-title span', { visible: true });
     const title = await page.$eval('.page-title span', el => el.textContent.trim().toLowerCase());
     expect(title).toContain('jackets');
   }, 30000);
   
-  
-
   test('5. Search for "hoodie" using search bar', async () => {
     await page.goto('https://magento.softwaretestingboard.com', { waitUntil: 'networkidle2' });
-  
     await page.waitForSelector('#search', { visible: true });
     await page.type('#search', 'hoodie');
-    await page.keyboard.press('Enter'); // ← кращий спосіб для цього сайту
-  
+    await page.keyboard.press('Enter'); 
     await page.waitForNavigation({ waitUntil: 'domcontentloaded' });
-  
     const titleText = await page.$eval('.page-title span', el => el.textContent.trim().toLowerCase());
     expect(titleText).toContain('search results');
   }, 30000);  
